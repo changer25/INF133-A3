@@ -22,20 +22,31 @@ export class SearchComponent implements OnInit {
   searchCategory:string = 'artist';
   searchCategories:string[] = ['artist', 'album', 'track'];
   resources:ResourceData[] | undefined;
-
+  // trackResources: TrackData[] | undefined;
+  artistResources: ArtistData[] | undefined;
+  albumResources: AlbumData[] | undefined;
+  trackResources: TrackData[] | undefined;
   constructor(private spotifyService:SpotifyService) { }
 
   ngOnInit() {
   }
 
+  
   search() {
     console.log("Searching");
     if (!this.searchString) return; // Don't search if the string is empty
-
+    this.resources = undefined;
     this.spotifyService.searchFor(this.searchCategory, this.searchString)
       .then(data => {
-        this.resources = data; // Update the resources with the search result
-        console.log("Search results:", data); // Print the search results
+        console.log(data);
+        // Handle search results based on the category
+        if (this.searchCategory === 'artist') {
+          this.artistResources = data as ArtistData[];
+        } else if (this.searchCategory === 'album') {
+          this.albumResources = data as AlbumData[];
+        } else if (this.searchCategory === 'track') {
+          this.trackResources = data as TrackData[];
+        }
       })
       .catch(error => console.error("Search error:", error));
   }
