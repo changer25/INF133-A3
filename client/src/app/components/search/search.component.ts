@@ -35,20 +35,28 @@ export class SearchComponent implements OnInit {
   search() {
     console.log("Searching");
     if (!this.searchString) return; // Don't search if the string is empty
-    this.resources = undefined;
+  
+    // Do not clear all resources here
+    // this.resources = undefined;
+  
     this.spotifyService.searchFor(this.searchCategory, this.searchString)
       .then(data => {
         console.log(data);
         // Handle search results based on the category
         if (this.searchCategory === 'artist') {
           this.artistResources = data as ArtistData[];
+          this.albumResources = undefined; // Clear the other categories
+          this.trackResources = undefined;
         } else if (this.searchCategory === 'album') {
           this.albumResources = data as AlbumData[];
+          this.artistResources = undefined; // Clear the other categories
+          this.trackResources = undefined;
         } else if (this.searchCategory === 'track') {
           this.trackResources = data as TrackData[];
+          this.artistResources = undefined; // Clear the other categories
+          this.albumResources = undefined;
         }
       })
       .catch(error => console.error("Search error:", error));
   }
-
 }
