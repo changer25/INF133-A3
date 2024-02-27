@@ -24,18 +24,18 @@ export class AboutComponent implements OnInit {
   }
 
   navigateToTopTracks(): void {
-    this.router.navigate(['/top-tracks']); // Make sure the path matches your routing configuration
+    this.router.navigate(['/top-tracks']); // routing config
   }
 
   /*TODO: create a function which gets the "about me" information from Spotify when the button in the view is clicked.
   In that function, update the name, profile_pic, and profile_link fields */
   getAboutMe(): void {
     this.spotifyService.aboutMe().then(profileData => {
-      console.log('Profile Data:', profileData); // This will print the profile data to the console
+      console.log('Profile Data:', profileData); // test print
   
       this.name = profileData.name;
-      this.profile_pic = profileData.imageURL; // Use imageURL for the profile picture
-      this.profile_link = profileData.spotifyProfile; // Use spotifyProfile for the profile link
+      this.profile_pic = profileData.imageURL; 
+      this.profile_link = profileData.spotifyProfile; 
     }).catch(error => {
       console.error('Error fetching profile data:', error);
     });

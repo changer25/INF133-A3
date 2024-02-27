@@ -1,4 +1,4 @@
-<!-- In your search.component.html -->
+
 <h1>Search Spotify</h1>
 <input [(ngModel)]="searchString">
 <select [(ngModel)]="searchCategory">
@@ -6,11 +6,11 @@
 </select>
 <button class="btn btn-light" (click)="search()">Search</button>
 
-<!-- Display a carousel component for artists if artistResources is available -->
+<!-- displaying a carousel component for artists if artistResources is available -->
 <app-carousel *ngIf="artistResources" [resources]="artistResources" carouselId="searchCarousel"></app-carousel>
 
-<!-- Display a carousel component for albums if albumResources is available -->
+<!-- displaying a carousel component for albums if albumResources is available -->
 <app-carousel *ngIf="albumResources" [resources]="albumResources" carouselId="searchCarousel"></app-carousel>
 
-<!-- Display a track-list component for tracks if trackResources is available -->
+<!-- displaying a track-list component for tracks if trackResources is available -->
 <app-track-list *ngIf="trackResources" [tracks]="trackResources"></app-track-list>

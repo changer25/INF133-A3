@@ -129,11 +129,9 @@ export class SpotifyService {
     const endpoint = `/track-audio-features/${encodedId}`;
   
     return this.sendRequestToExpress(endpoint).then((data) => {
-      // Assuming the data contains the audio features directly
+
       return TrackFeature.FeatureTypes.map((featureType) => {
-        // For each feature type defined in TrackFeature, create a new TrackFeature instance
-        // The percent value is assumed to be directly available in the data for each feature type
-        // e.g., data.danceability for the danceability feature
+        // for each feature type defined in TrackFeature, create a new TrackFeature instance
         const percent = data[featureType] !== undefined ? data[featureType] : 0;
         return new TrackFeature(featureType, percent);
       });
@@ -141,11 +139,11 @@ export class SpotifyService {
   }
 
   getMyTopTracks(): Promise<TrackData[]> {
-    // This endpoint does not require a user ID since it's assumed to use the logged-in user's access token
+    // this endpoint does not require a user ID since it's assumed to use the logged-in user's access token
     const endpoint = '/me/top/tracks';
     console.log('hi');
     return this.sendRequestToExpress(endpoint).then((data) => {
-      // Assuming the response contains an array of track items
+      // assuming the response contains an array of track items
       console.log(data);
       return this.sendRequestToExpress(endpoint).then((data) => data.items.map((item: any) => new TrackData(item)));
     });

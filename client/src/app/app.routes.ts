@@ -11,7 +11,7 @@ export const routes: Routes = [
 	{ path: 'track/:id', component: TrackPageComponent},
 	{ path: 'album/:id', component: AlbumPageComponent},
 	{ path: '', component: HomePageComponent},
-    { path: 'top-tracks', component: TopTracksPageComponent } // Add this line for the Top Tracks route
+    { path: 'top-tracks', component: TopTracksPageComponent }
 ];
 
 @NgModule({
