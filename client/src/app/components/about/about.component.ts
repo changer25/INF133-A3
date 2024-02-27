@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
+import { TopTracksPageComponent } from '../top-tracks-page/top-tracks-page.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TopTracksPageComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
@@ -16,9 +18,13 @@ export class AboutComponent implements OnInit {
   profile_link:string | undefined;
 
   //TODO: inject the Spotify service
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  navigateToTopTracks(): void {
+    this.router.navigate(['/top-tracks']); // Make sure the path matches your routing configuration
   }
 
   /*TODO: create a function which gets the "about me" information from Spotify when the button in the view is clicked.

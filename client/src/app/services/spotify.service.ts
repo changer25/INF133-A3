@@ -139,4 +139,15 @@ export class SpotifyService {
       });
     });
   }
+
+  getMyTopTracks(): Promise<TrackData[]> {
+    // This endpoint does not require a user ID since it's assumed to use the logged-in user's access token
+    const endpoint = '/me/top/tracks';
+    console.log('hi');
+    return this.sendRequestToExpress(endpoint).then((data) => {
+      // Assuming the response contains an array of track items
+      console.log(data);
+      return this.sendRequestToExpress(endpoint).then((data) => data.items.map((item: any) => new TrackData(item)));
+    });
+  }
 }

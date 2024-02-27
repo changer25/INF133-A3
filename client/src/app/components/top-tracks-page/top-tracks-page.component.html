@@ -1,0 +1,36 @@
+<div class="container mt-3">
+  <h1 class="text-center mb-4">My Top Tracks</h1>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && topTracks.length === 0" class="alert alert-info" role="alert">
+    No tracks available.
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 top-tracks-row">
+    <div *ngFor="let track of topTracks" class="col card-margin">
+      <div class="card h-100">
+        <img [src]="track.imageURL" class="card-img-top" alt="{{ track.name }}">
+        <div class="card-body">
+          <!-- Hyperlink the track name -->
+          <h5 class="card-title"><a [href]="'/track/' + track.id">{{ track.name }}</a></h5>
+          <!-- Hyperlink the primary artist name -->
+          <p class="card-text">
+            <a *ngIf="track.primaryArtist" [href]="'/artist/' + track.primaryArtist.id">{{ track.primaryArtist.name }}</a>
+          </p>
+          <p class="card-text">{{ track.durationStr }}</p>
+        </div>
+        <div class="card-footer">
+          <!-- Hyperlink the album name -->
+          <small class="text-muted">
+            From album: <a *ngIf="track.album" [href]="'/album/' + track.album.id">{{ track.album.name }}</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
